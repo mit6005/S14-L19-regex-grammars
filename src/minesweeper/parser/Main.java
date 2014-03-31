@@ -31,16 +31,16 @@ public class Main {
 
 
     public static void main(String[] args) {
-        int[][] bombs = parse(BOARD_3x2);
+        boolean[][] bombs = parse(BOARD_3x2);
         System.out.println(Arrays.deepToString(bombs));
     }
 
     /**
      * @param string a Minesweeper board.  Must follow the grammar in Board.g4.
-     * @return a 2D array where array[y][x] is the number of bombs in cell (x,y).
+     * @return a 2D array where array[y][x] is true iff cell (x,y) has a bomb.
      *    *** A better design would return an object of a Board ADT rather than this low-level rep.
      */
-     public static int[][] parse(String string) {
+     public static boolean[][] parse(String string) {
         // Create a stream of tokens using the lexer.
         CharStream stream = new ANTLRInputStream(string);
         BoardLexer lexer = new BoardLexer(stream);
@@ -87,19 +87,19 @@ public class Main {
      }
      
      private static class MakeBoard extends BoardBaseListener {
-         int[][] bombs;
+         boolean[][] bombs;
          int nextY = 0;
          
          public void exitBoard(BoardParser.BoardContext ctx) { 
              int x = Integer.valueOf(ctx.x().getText());
              int y = Integer.valueOf(ctx.y().getText());
-             bombs = new int[y][x];             
+             bombs = new boolean[y][x];             
          }
          
          public void exitLine(BoardParser.LineContext ctx) {
              List<TerminalNode> vals = ctx.VAL();
              for (int x = 0; x < vals.size(); ++x) {
-                 bombs[nextY][x] = vals.get(x).getText().equals("1") ? 1 : 0;
+                 bombs[nextY][x] = vals.get(x).getText().equals("1");
              }
              ++nextY;
          }
