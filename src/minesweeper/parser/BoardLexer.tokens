@@ -1,0 +1,5 @@
+VAL=1
+INT=2
+NEWLINE=4
+SPACE=3
+' '=3

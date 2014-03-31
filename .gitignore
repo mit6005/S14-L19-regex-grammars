@@ -1,0 +1,12 @@
+.DS_Store
+bin/
+.settings/
+*~
+*.class
+*.log
+*.gdx
+*.cb
+*.cb2
+*.aux
+*.probs
+*.out

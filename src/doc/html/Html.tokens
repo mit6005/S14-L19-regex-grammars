@@ -1,0 +1,5 @@
+START_ITALIC=1
+END_ITALIC=2
+TEXT=3
+'<i>'=1
+'</i>'=2
